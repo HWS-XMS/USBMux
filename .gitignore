@@ -1,0 +1,23 @@
+# Firmware build artifacts
+firmware/build/
+firmware/generated.*.ld
+*.o
+*.elf
+*.bin
+*.map
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+.venv/
+
+# KiCad
+*.lck
+*-backups/
+fp-info-cache
+
+# IDE
+.vscode/
+.idea/
