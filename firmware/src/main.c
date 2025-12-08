@@ -34,6 +34,7 @@ static void process_incoming_data(void)
 
         if (c == '\r' || c == '\n') {
             if (cmd_len > 0) {
+                cmd_buf[cmd_len] = '\0';
                 commands_process(cmd_buf, cmd_len);
                 cmd_len = 0;
             }

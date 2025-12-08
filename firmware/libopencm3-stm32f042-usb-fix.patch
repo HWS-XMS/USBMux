@@ -1,0 +1,39 @@
+diff --git a/lib/stm32/st_usbfs_v2.c b/lib/stm32/st_usbfs_v2.c
+index f9baa579..7954a861 100644
+--- a/lib/stm32/st_usbfs_v2.c
++++ b/lib/stm32/st_usbfs_v2.c
+@@ -67,24 +67,26 @@ void st_usbfs_copy_from_pm(void *buf, const volatile void *vPM, uint16_t len)
+ {
+ 	const volatile uint16_t *PM = vPM;
+ 	uint8_t odd = len & 1;
+-	len >>= 1;
++	uint16_t words = len >> 1;
+ 
+ 	if (((uintptr_t)buf) & 0x01) {
+ 		uint8_t *dest = (uint8_t *)buf;
+-		for (; len; PM++, len--) {
++		for (; words; PM++, words--) {
+ 			uint16_t value = *PM;
+-			*(uint8_t *)dest++ = value;
+-			*(uint8_t *)dest++ = value >> 8;
++			*dest++ = value;
++			*dest++ = value >> 8;
++		}
++		if (odd) {
++			*dest = *(uint8_t *)PM;
+ 		}
+ 	} else {
+ 		uint16_t *dest = (uint16_t *)buf;
+-		for (; len; PM++, dest++, len--) {
++		for (; words; PM++, dest++, words--) {
+ 			*dest = *PM;
+ 		}
+-	}
+-
+-	if (odd) {
+-		*(uint8_t *)buf = *(uint8_t *)PM;
++		if (odd) {
++			*(uint8_t *)dest = *(uint8_t *)PM;
++		}
+ 	}
+ }
