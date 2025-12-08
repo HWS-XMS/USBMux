@@ -1,10 +1,10 @@
-"""USBMux - Python wrapper for USB Mux controller."""
+"""USBMux device implementation."""
 
 import serial
 import serial.tools.list_ports
 
-VID = 0x0483
-PID = 0x5740
+VID = 0x1337
+PID = 0x4D58
 
 
 class USBMuxError(Exception):
@@ -25,7 +25,7 @@ class USBMuxNotFoundError(USBMuxError):
 class USBMux:
     """Controller for USB Mux device."""
 
-    def __init__(self, port: str | None = None, timeout: float = 1.0):
+    def __init__(self, port: str = None, timeout: float = 1.0):
         """
         Initialize USBMux connection.
 
