@@ -17,7 +17,7 @@ void gpio_init(void)
     gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE,
                     MUX_NOE_PIN | MUX_SEL_PIN | EN0_PIN | EN1_PIN);
 
-    /* Inputs: nFAULT_0, nFAULT_1 (active low, external pull-up on TPS2051) */
+    /* Inputs: nFAULT_0, nFAULT_1 (active low, external pull-up to VBUS_DEV) */
     gpio_mode_setup(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE,
                     NFAULT0_PIN | NFAULT1_PIN);
 
